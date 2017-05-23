@@ -88,22 +88,7 @@
 			}
 		});
 	}
-	var months = [
-		"zerobased",
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
-
-	];
+	var months = ["zerobased","January","February","March","April","May","June","July","August","September","October","November","December"];
 	var attendance = [];
 	var labels = [];
 	var totals = [];
@@ -168,9 +153,36 @@
 	                    beginAtZero:true
 	                }
 	            }]
+	        },
+	        onClick: function(evt){
+	        	var activePoints = myChart.getElementsAtEvent(evt);
+	        	//console.log(activePoints[0]["_model"]['label']);
+	        	var label = activePoints[0]["_model"]['label'];
+	        	//console.clear();
+	        	var date = label.split(" - ", 3)[0];
+	        	var service = label.split(" - ", 3)[1];
+	        	/*fix date*/
+	        		//month
+	        		var monthnumber = date.slice(0, -9);
+	        		var monthlenght = monthnumber.length;
+	        		monthlenght++;
+	        		var day = label.substr(monthlenght, 2);
+	        		var year = date.substr(-4);
+	        		for(var ctr = 0; ctr < months.length; ctr++){
+	        			if(monthnumber == months[ctr]){
+	        				monthnumber = ctr;
+	        				if(monthnumber < 9){
+	        					monthnumber = "0" + monthnumber;
+	        				}
+	        			}
+	        		}
+	        		var date = year+"-"+monthnumber+"-"+day;
+	        	/*fix date*/
+        	    var redirectWindow = window.open('servicedetails.php?date='+date+'&service='+service, '_blank');
+    			redirectWindow.location;
 	        }
 	    }
 	});
 </script>
 </body>
-</html> 
+</html>

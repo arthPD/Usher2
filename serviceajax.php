@@ -55,6 +55,7 @@
 		$attmemrow = R::dispense('attendancemember');
 		$attmemrow->attendance_id = $_SESSION['attendance'];
 		$attmemrow->member_id = $_POST['memberid'];
+		//$attmemrow->timestamp = date("Y-m-d");
 		if(isset($_POST['note'])){
 			$attmemrow->first = 1;
 		}
